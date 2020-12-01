@@ -339,8 +339,8 @@ class classy(BoltzmannBase):
         # CLASS not correctly initialized, or input parameters not correct
         except CosmoSevereError:
             self.log.error("Serious error setting parameters or computing results. "
-                           "The parameters passed were %r and %r. "
-                           "See original CLASS's error traceback below.\n",
+                           "The parameters passed were %r and %r. To see the original "
+                           "CLASS' error traceback, make 'debug: True'.",
                            state["params"], self.extra_args)
             raise  # No LoggedError, so that CLASS traceback gets printed
         # Gather products
@@ -388,6 +388,7 @@ class classy(BoltzmannBase):
 
         To get a parameter *from a likelihood* use `get_param` instead.
         """
+        # TODO: fails with derived_requested=False
         # Put all parameters in CLASS nomenclature (self.derived_extra already is)
         requested = [self.translate_param(p) for p in (
             self.output_params if derived_requested else [])]
